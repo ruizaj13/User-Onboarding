@@ -1,33 +1,41 @@
 import React from 'react'
 
-const onSubmit = event => {
-    event.preventDefault()
-}
 
-export default function Form() {
+
+export default function Form(props) {
+
+    const {onSubmit, change, inputValues, disable, users} = props
+
+    const onChange = evt => {
+        const {name, type, value, checked} = evt.target
+        const valueToUse = type === 'checkbox' ? checked : value
+        change(name, valueToUse)
+    }
+
     return(
-      <form className='App' onSubmit={onSubmit}>
+      <form onSubmit={onSubmit}>
           <h1>User Onboarding</h1>
           <label>
-              Name: <input type='text'/>
+              Name: <input onChange={onChange} value={inputValues.name} type='text' name='name' />
           </label>
             <br/>
             <br/>
           <label>
-              Email: <input type='email'/>
+              Email: <input onChange={onChange} value={inputValues.email} type='text' name='email' />
           </label>
             <br/>
             <br/>
           <label>
-              Password: <input type='password'/>
+              Password: <input onChange={onChange} value={inputValues.password} type='password' name= 'password' />
           </label>
             <br/>
             <br/>
           <label>
-              Terms of Service: <input type='checkbox'/>
+              Terms of Service: <input onChange={onChange} checked={inputValues.tos} type='checkbox' name='tos'/>
           </label>
             <br/>
-          <button>Submit</button> 
+          <button disabled={disable}>Submit</button> 
+          <pre>{JSON.stringify(users, null, 2)}</pre>
       </form>
     )
 }

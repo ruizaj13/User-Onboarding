@@ -13,13 +13,63 @@ const initialFormValues = {
 }
 
 const initialFormErrors ={
-  
+  email: '',
+  password: '',
 }
+
+const initialUsers = []
+const initialDisable = true
+
 
 function App() {
 
+    const [users, setUsers] = useState(initialUsers);
+    const [formValues, setFormValues] = useState(initialFormValues);
+    const [buttonDisable, setButtonDisable] = useState(initialDisable);
+    const [formErrors, setFormErrors] = useState(initialFormErrors);
+
+  //start event handlers
+
+    const onSubmit = event => {
+
+      event.preventDefault()
+
+      axios
+        .post('https://reqres.in/api/users', formValues)
+
+        .then( res => {
+          setUsers(res.data);
+        })
+
+        .catch(err=>console.log('peepee poopoo'))
+
+        .finally(() => {
+          setFormValues(initialFormValues)
+        })
+    };
+
+    const inputChange = (name, value) => {
+      setFormValues({
+        ...formValues,
+        [name]: value
+      })
+    }
+
+    useEffect(() => {
+      schema.isValid(formValues)
+        .then(valid => {
+          setButtonDisable(!valid)
+        })
+    }, [formValues])
 
 
+
+
+  //end event handlers
+
+   
+
+   
 
 
 
@@ -27,7 +77,7 @@ function App() {
 
   return (
     <div className="App">
-      <Form/>
+      <Form users={users} disable={buttonDisable} inputValues={formValues} change={inputChange} onSubmit={onSubmit}/>
     </div>
   );
 }
