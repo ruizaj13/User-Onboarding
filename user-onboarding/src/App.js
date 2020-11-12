@@ -38,7 +38,8 @@ function App() {
         .post('https://reqres.in/api/users', formValues)
 
         .then( res => {
-          setUsers(res.data);
+          const newUser = [...users, res.data]
+          setUsers(newUser);
         })
 
         .catch(err=>console.log('peepee poopoo'))

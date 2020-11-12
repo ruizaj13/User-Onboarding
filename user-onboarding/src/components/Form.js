@@ -13,6 +13,7 @@ export default function Form(props) {
     }
 
     return(
+    <div>
       <form onSubmit={onSubmit}>
           <h1>User Onboarding</h1>
           <label>
@@ -35,7 +36,16 @@ export default function Form(props) {
           </label>
             <br/>
           <button disabled={disable}>Submit</button> 
-          <pre>{JSON.stringify(users, null, 2)}</pre>
       </form>
+          <div>
+            {users.map((item) => (
+              <div>
+                <p>{item.name}</p>
+                <p>{item.email}</p>
+                <p>{item.password}</p>
+              </div>
+            ))}
+          </div>
+    </div>
     )
 }
