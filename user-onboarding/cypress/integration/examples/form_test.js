@@ -8,6 +8,15 @@ describe('User Onboarding Form', () =>{
         expect(1).to.eql(1)
     })
 
-    const textInput = (name) => cy.get(`input[name=${name}]`)
+    const formInput = (name) => cy.get(`input[name=${name}]`)
+    const button = (id) => cy.get(`button[id=${id}]`)
+
+    it('checking inputs exist', () => {
+        formInput('name').should('exist')
+        formInput('email').should('exist')
+        formInput('password').should('exist')
+        formInput('tos').should('exist')
+        button('submitBtn').should('exist')
+    })
 
 })

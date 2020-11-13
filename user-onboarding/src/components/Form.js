@@ -35,7 +35,7 @@ export default function Form(props) {
               Terms of Service: <input onChange={onChange} checked={inputValues.tos} type='checkbox' name='tos'/>
           </label>
             <br/>
-          <button disabled={disable}>Submit</button> 
+          <button disabled={disable} id='submitBtn'>Submit</button> 
       </form>
           <div>
             {users.map((item) => (
