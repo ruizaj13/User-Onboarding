@@ -19,4 +19,41 @@ describe('User Onboarding Form', () =>{
         button('submitBtn').should('exist')
     })
 
+    describe('testing text inputs are functional', () => { 
+
+        it('can type in input fields', () => {
+            formInput('name')
+                .should('have.value', '')
+                .type('Billy')
+                .should('have.value', 'Billy')
+            formInput('email')
+                .should('have.value', '')
+                .type('billyissilly@yahoo.com')
+                .should('have.value', 'billyissilly@yahoo.com')
+            formInput('password')
+                .should('have.value', '')
+                .type('billybillybilly')
+                .should('have.value','billybillybilly')
+        })
+
+        it('tos can be checked', () => {
+            formInput('tos').should('not.be.checked')
+            formInput('tos').check().should('be.checked')
+            formInput('tos').uncheck()
+        })
+
+        it('submit button enables when form is filled and user is submitted', () => {
+            button('submitBtn').should('be.disabled')
+            formInput('name').type('Billy')
+            formInput('email').type('billyissilly@yahoo.com')
+            formInput('password').type('billybillybilly')
+            formInput('tos').check()
+            button('submitBtn').should('be.enabled')
+            button('submitBtn').click()
+        })
+
+       
+    })
+    
+
 })
