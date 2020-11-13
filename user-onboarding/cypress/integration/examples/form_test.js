@@ -48,8 +48,8 @@ describe('User Onboarding Form', () =>{
             formInput('email').type('billyissilly@yahoo.com')
             formInput('password').type('billybillybilly')
             formInput('tos').check()
-            button('submitBtn').should('be.enabled')
-            button('submitBtn').click()
+            button('submitBtn').should('be.enabled').click()
+            
         })
 
        
